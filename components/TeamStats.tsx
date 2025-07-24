@@ -1,17 +1,6 @@
-type Props = {
-  data: {
-    teamName: string
-    totalCoins: number
-    members?: {
-      userId: number
-      name: string
-      coins: number
-      percentage: number
-    }[]
-  }
-}
+import { TeamStatsData } from "@/app/types"
 
-export default function TeamStats({ data }: Props) {
+export default function TeamStats({ data }: { data: TeamStatsData }) {
   return (
     <div>
       <h2 className="text-xl font-semibold mb-2">{data.teamName}</h2>

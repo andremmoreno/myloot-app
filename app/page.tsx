@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react"
 import TeamStats from "@/components/TeamStats"
 import DateFilter from "@/components/DateFilter"
+import { Team, TeamStatsData } from "@/app/types";
 
 export default function Home() {
   const [from, setFrom] = useState<string>("")
   const [to, setTo] = useState<string>("")
-  const [data, setData] = useState<any>(null)
+  const [data, setData] = useState<TeamStatsData | null>(null)
   const [loading, setLoading] = useState(false)
-  const [teams, setTeams] = useState<any>([])
+  const [teams, setTeams] = useState<Team[]>([])
   const [selectedTeamId, setSelectedTeamId] = useState<number>(0)
 
   const fetchStats = async (id: number) => {
@@ -69,7 +70,7 @@ export default function Home() {
       <h1 className="text-2xl font-bold mb-4">Team Stats</h1>
       <DateFilter from={from} to={to} onChange={(f, t) => { setFrom(f); setTo(t); }} onCleanFilter={handleCleanFilter} /> 
       <div className="flex gap-2 mb-4 max-w-full overflow-x-auto scrollbar-hide">
-        {teams.map((team: any) => (
+        {teams.map((team) => (
           <button 
             key={team.id} 
             onClick={() => handleClickTeam(team.id)} 

@@ -46,8 +46,8 @@ export async function GET(
     });
   }
 
-  const members = users.map((user: any) => {
-    const coins = (user.earnings as Array<{ amount: number }>).reduce((acc: number, e) => acc + e.amount, 0);
+  const members = users.map((user) => {
+    const coins = user.earnings.reduce((acc, e) => acc + e.amount, 0);
     return {
       userId: user.id,
       name: user.name,
@@ -55,14 +55,14 @@ export async function GET(
     };
   });
 
-  const totalCoins = members.reduce((acc: number, m: any) => acc + m.coins, 0);
+  const totalCoins = members.reduce((acc, m) => acc + m.coins, 0);
 
   const enriched = members
-    .map((m: any) => ({
+    .map((m) => ({
       ...m,
       percentage: totalCoins === 0 ? 0 : Math.round((m.coins / totalCoins) * 100),
     }))
-    .sort((a: any, b: any) => b.coins - a.coins);
+    .sort((a, b) => b.coins - a.coins);
 
   return NextResponse.json({
     teamId,
