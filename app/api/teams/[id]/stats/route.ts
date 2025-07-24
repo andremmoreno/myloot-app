@@ -16,18 +16,15 @@ export async function GET(
     where: { teamId },
     include: {
       earnings: true,
-      team: {
-        select: {
-          name: true,
-        },
-      },
     },
   });
+
+  const teamName = (await prisma.team.findUnique({ where: { id: teamId } }))?.name;
 
   if (users.length === 0) {
     return NextResponse.json({
       teamId,
-      teamName: users[0].team.name,
+      teamName,
       totalCoins: 0,
       members: [],
     });
@@ -53,7 +50,7 @@ export async function GET(
 
   return NextResponse.json({
     teamId,
-    teamName: users[0].team.name,
+    teamName,
     totalCoins,
     members: enriched,
   });

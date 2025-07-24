@@ -83,7 +83,7 @@ export default function Home() {
       <div className="border p-4 rounded bg-gray-800 border-gray-700">
         <h2 className="text-xl font-semibold mb-2">Team Stats</h2>
         {loading && <p>Loading...</p>}
-        {data && <TeamStats data={data} />}
+        {data && !loading && <TeamStats data={data} />}
       </div>
     </main>
   )
