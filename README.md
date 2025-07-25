@@ -109,5 +109,14 @@ You can repeat this request with different `userId` and `amount` values to add m
 - Modify the schema in `prisma/schema.prisma` and run `npx prisma migrate dev` to update the database.
 - Use the `structure.sql` file to reset or manually populate the database.
 
+## Branches & Database Setup
+To simplify development and deployment, I separated the database usage by branch:
+
+- main: uses SQLite with a local dev.db file, ideal for testing and local development without external dependencies.
+
+- deploy (or your chosen production branch): uses PostgreSQL, with the database hosted on Railway.
+
+This setup allows for quick local testing with SQLite, while maintaining a production-ready configuration with PostgreSQL
+
 ## License
 MIT
